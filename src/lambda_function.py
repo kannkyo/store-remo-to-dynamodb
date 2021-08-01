@@ -70,14 +70,14 @@ def lambda_handler(event, context):
         region_name="ap-northeast-1",
         secret_name=os.environ.get('REMO_SECRET_NAME'))
 
-    remo = Remo(access_token=secret['access_token'])
+    remo = Remo(access_token=secret[os.environ.get('ACCESSS_TOKEN')])
 
     logger.info(remo.get_appliances())
     logger.info(remo.get_devices()[0])
 
     aircon = Appliance(
-        access_token=secret['access_token'],
-        appliance_id=secret['aircon_appliance_id'])
+        access_token=secret[os.environ.get('ACCESSS_TOKEN')],
+        appliance_id=secret[os.environ.get('APPLICANCE_ID')])
     signals = aircon.get_signals()
     logger.info(signals)
 
